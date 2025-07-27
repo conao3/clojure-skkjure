@@ -1,4 +1,5 @@
-(ns skkjure.core)
+(ns skkjure.core
+  (:gen-class))
 
 (declare commands)
 
