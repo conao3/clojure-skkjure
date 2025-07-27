@@ -1,9 +1,9 @@
 (ns dev
   (:require
    [com.stuartsierra.component.repl :as component.repl]
-   [skkjure.system :as c.system]))
+   [skkjure.core :as c.core]))
 
-(component.repl/set-init (fn [_old-system] (c.system/new-system)))
+(component.repl/set-init (fn [_old-system] (c.core/new-system)))
 (def system component.repl/system)
 (def start component.repl/start)
 (def stop component.repl/stop)

@@ -1,34 +1,23 @@
 (ns skkjure.core
-  (:gen-class))
+  (:require
+   [com.stuartsierra.component :as component]
+   [skkjure.serve :as c.serve]
+   [clojure.tools.logging :as log]))
 
-(declare commands)
+(defrecord Server [server]
+  component/Lifecycle
+  (start [this]
+    (log/info "Starting Server...")
+    (let [server (c.serve/start)]
+      (log/info "Started Server")
+      (assoc this :server server)))
 
-(defn add [a b]
-  (+ a b))
+  (stop [this]
+    (log/info "Stopping Server...")
+    (server :timeout 100)
+    (log/info "Stopped Server")
+    (assoc this :server nil)))
 
-(defn eprintln [& args]
-  (binding [*out* *err*]
-    (apply println args)))
-
-(defn cmd-serve
-  "Serve skkjure server"
-  [& args]
-  (eprintln args))
-
-(defn cmd-help
-  "Help"
-  [& _args]
-  (eprintln "Available commands:")
-  (doseq [[k v] commands]
-    (-> (format "  %s - %s" (name k) (:doc (meta v)))
-        eprintln)))
-
-(def commands {:serve #'cmd-serve
-               :help #'cmd-help})
-
-(defn -main [& args]
-  (if-let [command (get commands (keyword (first args)))]
-    (apply command args)
-    (do (when (first args)
-          (eprintln (format "`%s' is not a skkjure command." (first args))))
-        (apply cmd-help args))))
+(defn new-system []
+  (component/system-map
+   :server (map->Server {})))
