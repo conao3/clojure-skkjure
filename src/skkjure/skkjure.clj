@@ -1,5 +1,9 @@
 (ns skkjure.skkjure
-  (:gen-class))
+  (:gen-class)
+  (:require
+   [clojure.tools.logging :as log]
+   [com.stuartsierra.component :as component]
+   [skkjure.core :as c.core]))
 
 (declare commands)
 
@@ -12,8 +16,15 @@
 
 (defn cmd-serve
   "Serve skkjure server"
-  [& args]
-  (eprintln args))
+  [& _args]
+  (let [system (-> (c.core/new-system)
+                   component/start-system)]
+    (-> (Runtime/getRuntime)
+        (.addShutdownHook (Thread. (fn []
+                                     (log/info "Shutdown signal received")
+                                     (component/stop-system system)
+                                     (log/info "Shutdown hook completed")))))
+    (Thread/sleep Long/MAX_VALUE)))
 
 (defn cmd-help
   "Help"
