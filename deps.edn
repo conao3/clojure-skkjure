@@ -17,5 +17,5 @@
                      "--interactive"
                      "--middleware" "[cider.nrepl/cider-middleware]"]}
   :test {:main-opts ["-m" "kaocha.runner"]}
-  :build {:deps {io.github.clojure/tools.build {:mvn/version "0.10.9"}}
+  :build {:extra-deps {io.github.clojure/tools.build {:mvn/version "0.10.9"}}
           :ns-default build}}}
