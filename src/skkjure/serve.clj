@@ -3,7 +3,7 @@
    [org.httpkit.server :as httpkit.server]))
 
 (defn app [req]
-  ((requiring-resolve clojure.pprint/pprint) req)
+  ((requiring-resolve 'clojure.pprint/pprint) req)
   {:status 200
    :body "Hello HTTP!"})
 
