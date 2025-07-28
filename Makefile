@@ -3,25 +3,13 @@ all: native
 
 UNAME_OS := $(shell uname -s)
 
-define REPL_DEPS
-{:deps
-  {nrepl/nrepl {:mvn/version "RELEASE"}
-   cider/cider-nrepl {:mvn/version "RELEASE"}}}
-endef
-export REPL_DEPS
-
-define REPL_MIDDLEWARE
-cider.nrepl/cider-middleware,
-endef
-export REPL_MIDDLEWARE
-
 ifeq ($(UNAME_OS),Darwin)
 GRAAL_BUILD_ARGS += -H:-CheckToolchain
 endif
 
 .PHONY: repl
 repl:
-	clj -A:dev:build -J-Djdk.attach.allowAttachSelf -Sdeps "$${REPL_DEPS}" -M -m nrepl.cmdline --interactive --middleware "[$${REPL_MIDDLEWARE}]"
+	clj -M:dev:build:repl
 
 .PHONY: test
 test:
