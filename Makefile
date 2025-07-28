@@ -21,7 +21,7 @@ endif
 
 .PHONY: repl
 repl:
-	clj -A:dev:build -Sdeps "$${REPL_DEPS}" -M -m nrepl.cmdline --interactive --middleware "[$${REPL_MIDDLEWARE}]"
+	clj -A:dev:build -J-Djdk.attach.allowAttachSelf -Sdeps "$${REPL_DEPS}" -M -m nrepl.cmdline --interactive --middleware "[$${REPL_MIDDLEWARE}]"
 
 .PHONY: test
 test:
