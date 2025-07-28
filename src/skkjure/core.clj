@@ -14,7 +14,7 @@
 
   (stop [this]
     (log/info "Stopping Server...")
-    (server :timeout 100)
+    (server :timeout 1000)
     (log/info "Stopped Server")
     (assoc this :server nil)))
 
