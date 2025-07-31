@@ -1,6 +1,6 @@
 (ns skkjure.serve
   (:require
-   [org.httpkit.server :as httpkit.server]))
+   [lsp4clj.io-server :as lsp.io-server]))
 
 (defn app [req]
   ((requiring-resolve 'clojure.pprint/pprint) req)
@@ -8,4 +8,4 @@
    :body "Hello HTTP!"})
 
 (defn start []
-  (httpkit.server/run-server app))
+  (lsp.io-server/stdio-server))
