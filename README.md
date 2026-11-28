@@ -1,4 +1,12 @@
-# skkjure
+<p align="center"><img src="docs/assets/banner.png" alt="skkjure: An SKK Japanese input server for editors, written in Clojure" width="880"></p>
+
+<p align="center"><strong>An SKK Japanese input server for editors, written in Clojure</strong></p>
+
+<p align="center"><a href="LICENSE"><img src="https://img.shields.io/github/license/conao3/clojure-skkjure" alt="License"></a> <a href="https://github.com/conao3/clojure-skkjure/stargazers"><img src="https://img.shields.io/github/stars/conao3/clojure-skkjure?style=flat" alt="GitHub stars"></a></p>
+
+<p align="center"><a href="#installation">Installation</a> | <a href="#usage">Usage</a> | <a href="#development">Development</a> | <a href="#license">License</a></p>
+
+<h1>skkjure</h1>
 
 An SKK (Simple Kana to Kanji conversion) server implementation written in Clojure.
 
